@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Albert Muravtsev](https://up.htmlacademy.ru/javascript/17/user/517137).
-* Наставник: `Неизвестно`.
+* Наставник: [Анастасия Ничипорчук](https://htmlacademy.ru/profile/id612797).
 
 ---
 
