@@ -45,7 +45,7 @@ var getRandomInt = function (min, max) {
 // Определяем сколько будет комментариев 1 или 2
 var getQuantityComments = function () {
   var quantityComments = getRandomInt(1, 2);
-  return (quantityComments === 1) ? PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] : PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] + ' ' + PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)]
+  return (quantityComments === 1) ? PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] : PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] + ' ' + PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)];
 };
 
 // Cоздание массива с комментариями
@@ -60,7 +60,6 @@ var getArrayComments = function (arr) {
 };
 
 getArrayComments(commentaries);
-console.log(commentaries);
 // Функция для наполнения массива
 var fillArray = function (arr) {
   for (var i = 0; i < PHOTOS_QUANTITY; i++) {
@@ -75,7 +74,6 @@ var fillArray = function (arr) {
 };
 
 fillArray(photos);
-console.log(photos);
 
 // Создаем функцию для создания DOM-элементов
 var createPhotos = function (photo) {
