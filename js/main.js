@@ -1,7 +1,7 @@
 'use strict';
 
 // Длина массива
-var PHOTOS_LENGTH = 25;
+var PHOTOS_QUANTITY = 25;
 
 var photos = [];
 
@@ -9,10 +9,10 @@ var photos = [];
 var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 // Блок, куда вставить созданные элементы
-var picture = document.querySelector('.picture');
+var picture = document.querySelector('.pictures');
 
 
-var comments = [
+var PHOTO_COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -21,7 +21,7 @@ var comments = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-var names = [
+var PHOTO_NAMES = [
   'Юлия',
   'Виктория',
   'Антон',
@@ -41,14 +41,35 @@ var getRandomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+
+// Определяем сколько будет комментариев 1 или 2
+var getQuantityComments = function () {
+  var quantityComments = getRandomInt(1, 2);
+  return (quantityComments === 1) ? PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] : PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] + ' ' + PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)]
+};
+
+// Cоздание массива с комментариями
+var commentaries = [];
+var COMMENTARIES_QUANTITY = getRandomInt(1, 5);
+var getArrayComments = function (arr) {
+  for (var i = 0; i < COMMENTARIES_QUANTITY; i++) {
+    arr[i] = {
+      comments: getQuantityComments()
+    };
+  }
+};
+
+getArrayComments(commentaries);
+console.log(commentaries);
 // Функция для наполнения массива
 var fillArray = function (arr) {
-  for (var i = 0; i < PHOTOS_LENGTH; i++) {
+  for (var i = 0; i < PHOTOS_QUANTITY; i++) {
     arr[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: getRandomInt(15, 200),
-      comments: comments[getRandomIndex(comments)],
-      name: names[getRandomIndex(names)]
+      // Не понял, что здесь должно отображаться
+      comments: commentaries.length,
+      name: PHOTO_NAMES[getRandomIndex(PHOTO_NAMES)]
     };
   }
 };
@@ -61,8 +82,8 @@ var createPhotos = function (photo) {
   var elementPhoto = similarPhotoTemplate.cloneNode(true);
   elementPhoto.querySelector('.picture__img').src = photo.url;
   elementPhoto.querySelector('.picture__name').textContent = photo.name;
-  // element.querySelector('.picture__comments').textContent = photo.comments;
-  // element.querySelector('.picture__likes').textContent = photo.likes;
+  elementPhoto.querySelector('.picture__comments').textContent = photo.comments;
+  elementPhoto.querySelector('.picture__likes').textContent = photo.likes;
   return elementPhoto;
 };
 
