@@ -31,11 +31,6 @@ var PHOTO_NAMES = [
   'Ева'
 ];
 
-// Функция для нахождения случайного индекса массива
-var getRandomIndex = function (arr) {
-  return Math.floor(Math.random() * arr.length);
-};
-
 // Функция для нахождения случайного целого числа в интервале
 var getRandomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -45,41 +40,42 @@ var getRandomInt = function (min, max) {
 // Определяем сколько будет комментариев 1 или 2
 var getQuantityComments = function () {
   var quantityComments = getRandomInt(1, 2);
-  return (quantityComments === 1) ? PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] : PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)] + ' ' + PHOTO_COMMENTS[getRandomIndex(PHOTO_COMMENTS)];
+  return (quantityComments === 1) ? PHOTO_COMMENTS[getRandomInt(0, PHOTO_COMMENTS.length)] : PHOTO_COMMENTS[getRandomInt(0, PHOTO_COMMENTS.length)] + ' ' + PHOTO_COMMENTS[getRandomInt(0, PHOTO_COMMENTS.length)];
 };
 
 // Cоздание массива с комментариями
-var commentaries = [];
-var COMMENTARIES_QUANTITY = getRandomInt(1, 5);
-var getArrayComments = function (arr) {
-  for (var i = 0; i < COMMENTARIES_QUANTITY; i++) {
+var getArrayComments = function () {
+  var arr = [];
+  var arrLength = getRandomInt(1, 5);
+  for (var i = 0; i < arrLength; i++) {
     arr[i] = {
-      comments: getQuantityComments()
+      avatar: 'img/avatar-' + (i + 1) + '.svg',
+      message: getQuantityComments(),
+      name: PHOTO_NAMES[getRandomInt(0, PHOTO_NAMES.length)]
     };
   }
+  return arr;
 };
 
-getArrayComments(commentaries);
 // Функция для наполнения массива
 var fillArray = function (arr) {
   for (var i = 0; i < PHOTOS_QUANTITY; i++) {
+    var commentaries = getArrayComments();
     arr[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: getRandomInt(15, 200),
-      // Не понял, что здесь должно отображаться
-      comments: commentaries.length,
-      name: PHOTO_NAMES[getRandomIndex(PHOTO_NAMES)]
+      comments: commentaries,
     };
   }
 };
 
 fillArray(photos);
+console.log(photos);
 
 // Создаем функцию для создания DOM-элементов
 var createPhotos = function (photo) {
   var elementPhoto = similarPhotoTemplate.cloneNode(true);
   elementPhoto.querySelector('.picture__img').src = photo.url;
-  elementPhoto.querySelector('.picture__name').textContent = photo.name;
   elementPhoto.querySelector('.picture__comments').textContent = photo.comments;
   elementPhoto.querySelector('.picture__likes').textContent = photo.likes;
   return elementPhoto;
