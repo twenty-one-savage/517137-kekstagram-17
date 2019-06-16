@@ -70,7 +70,6 @@ var fillArray = function (arr) {
 };
 
 fillArray(photos);
-console.log(photos);
 
 // Создаем функцию для создания DOM-элементов
 var createPhotos = function (photo) {
