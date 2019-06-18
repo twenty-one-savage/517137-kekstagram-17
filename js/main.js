@@ -93,3 +93,31 @@ var makeFragment = function (arr) {
 
 // Вставка созданных элементов в DOM
 picture.appendChild(makeFragment(photos));
+
+// module4-task1
+
+var uploadFile = document.querySelector('#upload-file');
+var editForm = document.querySelector('.img-upload__overlay');
+var scaleControlSmaller = document.querySelector('.scale__control--smaller');
+var scaleControlBigger = document.querySelector('.scale__control--bigger');
+var scaleControlValue = document.querySelector('.scale__control--value');
+
+// Устанавливаем значение в 100 (Оно должно быть по умолчанию)
+scaleControlValue.value = 100;
+
+// Открываем форму редактирования при загрузке фотографии
+uploadFile.addEventListener('change', function () {
+  editForm.classList.remove('hidden');
+});
+
+scaleControlSmaller.addEventListener('click', function () {
+  if (scaleControlValue.value > 25) {
+    scaleControlValue.value -= 25;
+  }
+});
+
+scaleControlBigger.addEventListener('click', function () {
+  if (scaleControlValue.value < 100) {
+    scaleControlValue.value = scaleControlValue.value * 1 + 25;
+  }
+});
