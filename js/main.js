@@ -116,6 +116,7 @@ var inputIntensity = document.querySelector('.effect-level__value');
 var effectLevelContainer = document.querySelector('.effect-level');
 var closeIcon = document.querySelector('#upload-cancel');
 var effectItems = document.querySelectorAll('.effects__radio');
+var commentField = document.querySelector('.text__description');
 
 // Функция для показа editForm
 var openEditForm = function () {
@@ -129,7 +130,7 @@ var closeEditForm = function () {
 
 // Функция для закрытия editForm по нажатию ESC на всей странице
 var editFormEscPressHandler = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (evt.keyCode === ESC_KEYCODE && document.activeElement !== commentField) {
     closeEditForm();
   }
 };
