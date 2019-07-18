@@ -141,6 +141,7 @@ uploadFile.addEventListener('change', function () {
   setPinMaxPosition();
   // Задаём масштаб картинки по умолчанию в 100%
   scaleControlValue.value = '100%';
+  inputIntensity.value = 100;
   // Скрываем блок с выбором интенсивности эффекта
   effectLevelContainer.classList.add('hidden');
   document.addEventListener('keydown', editFormEscPressHandler);
@@ -238,34 +239,36 @@ var getFilterIntensity = function (line, pin) {
   return imageFilterIntensity;
 };
 
+// Определение координат пина
+var calculatePinCoordinate = function (evt) {
+  var shift = {
+    x: evt.clientX
+  };
+  //  Определяем левый край
+  var leftEdge = shift.x - intensityLine.getBoundingClientRect().left;
+  if (leftEdge < 0) {
+    leftEdge = 0;
+  }
+  // Определяем правый край
+  var rightEdge = intensityLine.offsetWidth;
+  if (leftEdge > rightEdge) {
+    leftEdge = rightEdge;
+  }
+  intensityPin.style.left = leftEdge + 'px';
+  // Перемещение шкалы вместе с пином
+  intensityDepth.style.width = intensityPin.style.left;
+  // Применение фильтра к редактируемой картинке
+  imagePreview.style.filter = getFilterIntensity(intensityLine, intensityPin);
+};
+
 // Перемщение пина
 // обработаем событие начала перетаскивания нашего пина mousedown.
 intensityPin.addEventListener('mousedown', function () {
   var onMouseMove = function (moveEvt) {
-    var shift = {
-      x: moveEvt.clientX
-    };
-
-    //  Определяем левый край
-    var leftEdge = shift.x - intensityLine.getBoundingClientRect().left;
-    if (leftEdge < 0) {
-      leftEdge = 0;
-    }
-    // Определяем правый край
-    var rightEdge = intensityLine.offsetWidth;
-    if (leftEdge > rightEdge) {
-      leftEdge = rightEdge;
-    }
-
-    intensityPin.style.left = leftEdge + 'px';
-    // Перемещение шкалы вместе с пином
-    intensityDepth.style.width = intensityPin.style.left;
-    // Применение css к редактируемой картинке
-    imagePreview.style.filter = getFilterIntensity(intensityLine, intensityPin);
+    calculatePinCoordinate(moveEvt);
   };
   var onMouseUp = function (upEvt) {
-    upEvt.preventDefault();
-
+    calculatePinCoordinate(upEvt);
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   };
