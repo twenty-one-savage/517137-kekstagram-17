@@ -28,4 +28,5 @@
     // Вставка созданных элементов в DOM
     picture.appendChild(makeFragment(data));
   };
+
 })();
