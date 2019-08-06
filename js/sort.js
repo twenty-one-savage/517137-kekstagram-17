@@ -1,5 +1,5 @@
 'use strict';
-// Зависит от load.js и render.js
+// Зависит от load.js
 // sort module
 // Сортировка фотографий
 (function () {

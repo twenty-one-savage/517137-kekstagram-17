@@ -80,6 +80,9 @@
   // обработаем событие начала перетаскивания нашего пина mousedown.
   intensityPin.addEventListener('mousedown', function () {
     var onMouseMove = function (moveEvt) {
+      // var coordinate = function (x) {
+      //   this.x = moveEvt.clientX;
+      // }
       var shift = {
         x: moveEvt.clientX
       };
