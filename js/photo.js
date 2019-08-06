@@ -6,6 +6,24 @@
   var PHOTOS_QUANTITY = 25;
   var picture = document.querySelector('.pictures');
   var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  var bigPictureElement = document.querySelector('.big-picture');
+  var Photo = function (url, likes, comments, description) {
+    this.url = url;
+    this.likes = likes;
+    this.comments = comments;
+    this.description = description;
+  };
+
+  var renderBigphoto = function () {
+    // Удаялем класс hidden
+    bigPictureElement.classList.remove('hidden');
+    // Первый элемент массива пришедшего от сервера
+    var first = window.request.photos[0];
+    // Создаём экземпляр большой фотографии
+    var bigPhoto = new Photo(first.url, first.likes, first.comments.message,first.description);
+    return bigPhoto;
+  };
+  renderBigphoto();
   var createPhotos = function (photo) {
     var elementPhoto = similarPhotoTemplate.cloneNode(true);
     elementPhoto.querySelector('.picture__img').src = photo.url;

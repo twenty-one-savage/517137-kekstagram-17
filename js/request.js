@@ -1,10 +1,8 @@
 'use strict';
-// Зависит от render.js,load.js,sort.js
+// Зависит от load.js,sort.js
 // request module
 // Модуль с ответами сервера Успех/Ошибка
 (function () {
-  // eslint-disable-next-line no-unused-vars
-  var photos = [];
   var successHandler = function (data) {
     // Сохраняем пришедшие данные в массив
     window.request = {
