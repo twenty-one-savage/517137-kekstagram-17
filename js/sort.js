@@ -11,7 +11,7 @@
   var sortByPopular = function () {
     delPhoto();
     var arr = window.request.photos;
-    window.render(arr);
+    window.photo(arr);
   };
 
   // Сортировка фотографий по новым
@@ -25,7 +25,7 @@
 
     arr.sort(getRandomPhotos);
     var newArr = arr.slice(0, 10);
-    window.render(newArr);
+    window.photo(newArr);
   };
 
   // Функция для отображения обсуждаемых фото
@@ -35,7 +35,7 @@
     arr.sort(function (x, y) {
       return x.comments.length - y.comments.length;
     }).reverse();
-    window.render(arr);
+    window.photo(arr);
   };
 
   var delPhoto = function () {
@@ -45,17 +45,18 @@
     });
   };
 
-  sortByPopular = window.debounce(sortByPopular);
-  sortByNew = window.debounce(sortByNew);
-  sortByDiscussed = window.debounce(sortByDiscussed);
+  // sortByPopular = window.debounce(sortByPopular);
+  // sortByNew = window.debounce(sortByNew);
+  // sortByDiscussed = window.debounce(sortByDiscussed);
 
-  imgFiltersPopularElement.addEventListener('click', sortByPopular);
-
-  imgFiltersNewElement.addEventListener('click', sortByNew);
-
-  imgFiltersDiscussedElement.addEventListener('click', sortByDiscussed);
+  var addSortCallbacks = function () {
+    imgFiltersPopularElement.addEventListener('click', sortByPopular);
+    imgFiltersNewElement.addEventListener('click', sortByNew);
+    imgFiltersDiscussedElement.addEventListener('click', sortByDiscussed);
+  }
 
   window.sort = {
-    imgFiltersElement: imgFiltersElement
+    imgFiltersElement: imgFiltersElement,
+    addSortCallbacks: addSortCallbacks
   };
 })();

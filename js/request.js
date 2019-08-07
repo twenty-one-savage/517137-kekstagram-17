@@ -3,13 +3,15 @@
 // request module
 // Модуль с ответами сервера Успех/Ошибка
 (function () {
+  var photos = [];
   var successHandler = function (data) {
-    // Сохраняем пришедшие данные в массив
-    window.request = {
-      photos: data
-    };
+    photos = data;
+    // Отрисовка картинок
+    window.photo(photos);
     // Показываем окно с фильтрами
     window.sort.imgFiltersElement.classList.remove('img-filters--inactive');
+    window.sort.addSortCallbacks(photos);
+    console.log(photos);
   };
 
   var errorHandler = function (errorMessage) {
@@ -23,9 +25,9 @@
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
   };
-  window.load(successHandler, errorHandler);
-  // console.log(successHandler);
-  // window.request = {
-  //   photos: 'nhfkb'
-  // };
+  // Сохраняем пришедшие данные в массив
+  window.request = {
+    photos: photos
+  };
+  window.load.dataFromServer(successHandler, errorHandler);
 })();
