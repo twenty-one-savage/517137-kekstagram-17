@@ -3,6 +3,7 @@
 // Photo module
 // Генерирует и вставляет фотографии
 (function () {
+  var COMMENTS_COUNT = 5;
   var picture = document.querySelector('.pictures');
   var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var bigPictureElement = document.querySelector('.big-picture');
@@ -40,10 +41,10 @@
   var renderComments = function (comments) {
     listComment.innerHTML = '';
     var fragment = document.createDocumentFragment();
-    comments.forEach(function (element) {
-      var comment = createComment(element);
+    for (var i = 0; i < COMMENTS_COUNT; i++) {
+      var comment = createComment(comments[i]);
       fragment.appendChild(comment);
-    });
+    }
     listComment.appendChild(fragment);
   };
 
