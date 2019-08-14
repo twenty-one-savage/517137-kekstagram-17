@@ -5,13 +5,17 @@
 (function () {
   var photos = [];
   var successHandler = function (data) {
-    photos = data;
+    for (var i = 0; i < data.length; i++) {
+      photos.push(data[i]);
+    }
     // Отрисовка картинок
-    window.photo(photos);
+    window.photo.renderPhotos(photos);
     // Показываем окно с фильтрами
     window.sort.imgFiltersElement.classList.remove('img-filters--inactive');
-    window.sort.addSortCallbacks(photos);
-    console.log(photos);
+    // Показываем отсортированные фотографии
+    window.sort.addSortCallbacks();
+    // Показываем большую фотографию
+    window.photo.addPhotoCallbacks(photos[0]);
   };
 
   var errorHandler = function (errorMessage) {
