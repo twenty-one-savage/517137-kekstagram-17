@@ -53,7 +53,7 @@
     imgFiltersPopularElement.addEventListener('click', sortByPopular);
     imgFiltersNewElement.addEventListener('click', sortByNew);
     imgFiltersDiscussedElement.addEventListener('click', sortByDiscussed);
-  }
+  };
 
   window.sort = {
     imgFiltersElement: imgFiltersElement,

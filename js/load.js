@@ -4,7 +4,7 @@
   var SUCCESS_STATUS = 200;
   var TIMEOUT = 10000; // ms
 
-  var dataFromServer = function(onSuccess, onError) {
+  var dataFromServer = function (onSuccess, onError) {
     createRequest('GET', URL, onSuccess, onError);
   };
 

@@ -38,7 +38,6 @@
       // eslint-disable-next-line no-invalid-this
       setEffect(this.value);
       // Показываем блок со шкалой, когда выбран эффект
-      // eslint-disable-next-line no-invalid-this
       this.value !== 'none' ? effectLevelContainer.classList.remove('hidden') : effectLevelContainer.classList.add('hidden');
     });
   }
