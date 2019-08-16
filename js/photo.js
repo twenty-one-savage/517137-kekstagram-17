@@ -9,8 +9,8 @@
   var bigPictureElement = document.querySelector('.big-picture');
   var commentsElement = document.querySelector('.social__comments');
   var listComment = bigPictureElement.querySelector('.social__comments');
-  // var commentsCountElement = document.querySelector('.social__comment-count');
-  // var commentsLoaderElement = document.querySelector('.comments-loader');
+  var commentsCountElement = document.querySelector('.social__comment-count');
+  var commentsLoaderElement = document.querySelector('.comments-loader');
 
   // Cоздание массива с комментариями
   var createComment = function (photo) {
@@ -20,6 +20,8 @@
     commentImg.classList.add('social__picture');
     commentImg.src = 'img/avatar-' + window.util.getRandomInt(1, 6) + '.svg';
     commentImg.alt = 'Аватар комментатора фотографии';
+    commentImg.width = 35;
+    commentImg.height = 35;
     commentField.appendChild(commentImg);
     var commentDescription = document.createElement('p');
     commentDescription.classList.add('social__text');
@@ -36,6 +38,8 @@
     bigPictureElement.querySelector('.comments-count').textContent = photo.comments.length;
     bigPictureElement.querySelector('.social__caption').textContent = photo.description;
     renderComments(photo.comments);
+    commentsCountElement.classList.add('visually-hidden');
+    commentsLoaderElement.classList.add('visually-hidden');
   };
 
   var renderComments = function (comments) {
